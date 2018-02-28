@@ -1,0 +1,24 @@
+body {
+	text-align: center;
+}
+
+nav {
+	float: left;
+	margin-right: 50px;
+	margin-top: 100px;
+	line-height: 30px;
+}
+
+ul {
+	list-style-type: none;
+	text-decoration: none;
+	border: 1px solid;
+	border-radius: 5px;
+	padding-right: 30px;
+	line-height: 50px;
+}
+
+#contact {
+	text-align: center;
+	line-height: 30px;
+}
