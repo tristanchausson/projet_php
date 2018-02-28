@@ -17,14 +17,16 @@
 	<form action="blog.php" method="post">
 		<p>Afficher par :</p>
 		<select name="tri" id="tri">
-			<option value="croissant">Date croissante</option>
-			<option value="decroissant">Date décroissante</option>
+			<option name="croit" value="croissant">Date croissante</option>
+			<option name="decroit" value="decroissant">Date décroissante</option>
 		</select>
 		<button type="submit" value="filter" id="filter">Trier</button>
 	</form>
 	<br/>
 
 <?php
+	$croit = $_POST['croit'];
+	$decroit = $_POST['decroit'];
 	$db = mysqli_connect('localhost', 'root', 'root', 'projet_php') or die ('Erreur de connexion au serveur mySQL');
 	$query = "SELECT titre, image, intro, texte, date FROM blog ORDER BY date DESC";
 	$result = mysqli_query($db, $query);
