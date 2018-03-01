@@ -5,7 +5,7 @@ Projet découverte PHP
 Réalisation d'un mini site PHP/Mysql ayant l'architecture suivante :
 
     Home
-    A propose
+    A propos
     Bog
         Article de blog
     Evénements
@@ -54,6 +54,18 @@ La page Evénéments liste uniquement les événements à venir ou en cours. Seu
 
 Bonus: Permettre à l'utilisateur de filtrer la liste des événements par lieu
 Contact
+## Recherche d'évenements
+- Etq Utilisateur de la page d'evenements, je peux faire une recherche de tous les évenements qui contiennent un texte.
+- La zone de recherche sera constituée:
+ - D'une zone de saisie de texte
+ - D'une checkbox avec le libelle suivant: Recherche uniquement dans le titre
+ - D'un bouton Rechercher.
+ - Fonctionnement de la recherche:
+   - Au clic sur ce bouton
+     - Si la zone de saisie est vide on affiche toutes les annonces.
+     - Si la zone de saisie contient du texte
+       - Si la checkbox est cochée on affichera les évenements dont le titre contiennent la séquence de texte saisie par l'utilisateur.
+       - Si la checkbox n'est pas cochée on affichera les évenements dont le titre et/ou la description contiennent la séquence de texte saisie par l'utilisateur.
 
 La page de contact contient un formulaire demandant à l'utilisateur de saisir :
 
