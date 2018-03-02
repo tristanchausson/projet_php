@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php
+	session_start();  //affichage de la connexion utilisateur
+	include 'users/bdd.php';  //connexion à la base de données
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +15,7 @@
 		<?php include 'menu.php';?>
 	</nav>
 </main>
+<section>
 	<h2>Create Account</h2>
 
 	<form action="login.php" method="post">
@@ -42,19 +46,19 @@
 		$pass1 = $_POST['password1'];
 		$pass2 = $_POST['password2'];
 		$hashed_password = hash('sha512', $_POST['password1']);
-
+	//vérification de la concordance des 2 mots de passe
 		if($pass1!==$pass2) {
 			echo "Mot de passe non valide !";
 		}
-		
-	$db = mysqli_connect('localhost', 'root', 'root', 'projet_php') or die ('Erreur de connexion au serveur mySQL');
+	//insertion dans la BDD
 	$query = "INSERT INTO account (username, password) VALUES ('$user', '$hashed_password')";
 	$sql = "SELECT * FROM account WHERE username = '".$user."'";
 	$result = mysqli_query($db,$sql);
-	   
+	//si l'utilisateur existe déjà 
 	    if(mysqli_num_rows($result)>=1) {
 	        echo"Name already exists";
 	    }
+	//sinon crée l'utilisateur
 		else if (mysqli_query($db, $query)) {
 			echo "New user created successfully";
 		}
@@ -82,7 +86,6 @@
 			<input type="password" name="password" id="password">
 		</div>
 			<button type="submit" value="send" id="send">Connect</button>
-<!-- 			<button type="submit" value="disconnect" id="disconnect">Disonnect</button> -->
 		<br/>
 
 <?php
@@ -91,14 +94,12 @@
 		$password = $_POST['password'];
 		$hashed_pass = hash('sha512', $_POST['password']);
 
-	$db = mysqli_connect('localhost', 'root', 'root', 'projet_php') or die ('Erreur de connexion au serveur mySQL');
 	$sql = "SELECT * FROM account WHERE username = '".$user_name."'";
 	$pass = "SELECT * FROM account WHERE password = '".$hashed_pass."'";
 	$resuser = mysqli_query($db,$sql);
 	$respass = mysqli_query($db,$pass);
 	   
 	    if((mysqli_num_rows($resuser)>=1) && (mysqli_num_rows($respass)>=1)) {
-	        echo "Conexion OK !";
 	        header('Location: /index.php');
   			$_SESSION['nom'] = $user_name;
 	    }
@@ -109,10 +110,8 @@
 		}
 	}
 ?>
-
 	</form>
-
-
+</section>
 	<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php
+	session_start();  //affichage de la connexion utilisateur
+	include 'users/bdd.php';  //connexion à la base de données
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +15,7 @@
 		<?php include 'menu.php';?>
 	</nav>
 </main>
+<section>
 	<div id="contact">
 	<h2>Contact</h2>
 		<div id="formulaire">
@@ -57,10 +61,11 @@
 		$thematique = $_POST['thematique'];
 		$compte = $_POST['compte'];
 		$age = $_POST['age'];
-
+	//définition des termes non autorisés
 		if (stripos($objet, "simplon") !== false) {
 			echo "<p>Ces mots ne sont pas acceptés !</p>";
 		}
+	//affiche les infos rentrées par l'utilisateur
 		else {
 			echo "<p>Objet : </p>";
 			echo $_POST['objet'];
@@ -72,8 +77,7 @@
 			echo $_POST['compte'];
 			echo "<p>Votre Age : </p>";
 			echo $_POST['age'];
-		
-		$db = mysqli_connect('localhost', 'root', 'root', 'projet_php') or die ('Erreur de connexion au serveur mySQL');
+	//envoie les infos vers la BDD
 		$query = "INSERT INTO contact (objet, message, thematique, compte, age) VALUES ('$objet', '$message', '$thematique', '$compte', '$age')";
 			if (mysqli_query($db, $query)) {
 				echo "New record created successfully";
@@ -82,14 +86,9 @@
 			}
 		}
 	}
-
 ?>
 
-
-
-
-
-
+</section>
 	<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
